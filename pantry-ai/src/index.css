@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
   color: white;
@@ -28,15 +28,23 @@ body {
   width: 100%;
 }
 
+h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 85px;
+  margin: 45px 0;
+}
+
 button {
   border: solid 0.5px;
   background-color: rgb(255, 247, 210);
   color: black;
   border-color: black;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 0px 2.5px;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin: 0px 1px;
   cursor: pointer;
+  height: 30px;
+  text-align: center;
 }
 
 .items {
@@ -44,10 +52,47 @@ button {
   background-color: rgb(255, 247, 210);
   color: black;
   border-color: black;
-  border-radius: 20px;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 2.5px 1px;
+  width: 150px;
+}
+
+.quant {
+  border: solid 0.5px;
+  background-color: rgb(255, 247, 210);
+  color: black;
+  border-color: black;
+  border-radius: 5px;
   padding: 5px 15px;
   margin: 2.5px 0;
-  width: 100%;
+  width: 50px;
+}
+
+select {
+  border: solid 0.5px;
+  background-color: rgb(255, 247, 210);
+  color: black;
+  border-color: black;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 2.5px 0;
+  width: 100px;
+}
+
+option {
+  color: black;
+}
+
+.delete-button {
+  border: solid 0.5px;
+  background-color: tomato;
+  color: black;
+  border-color: black;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 2.5px 1px;
+  height: 33px;
 }
 
 .item-list {
@@ -62,11 +107,25 @@ button {
   display: flex;
   align-items: center;
   text-align: center;
+  margin-bottom: 15px;
 }
 
 input {
-  width: 120px;
+  width: 250px;
   margin: 0 1px;
   height: 25px;
   color: black;
+}
+
+.quantity {
+  width: 83px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 350px;
+  margin: 0;
 }
