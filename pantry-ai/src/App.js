@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 
 function App() {
 
+  const select_text = "Select All"
+  const deselect_text = "Deselect All"
+
   const sample_list = [{val:"Chicken Breast", quant:"2lbs"}, 
                        {val:"Bananas", quant:"x6"},
                        {val:"Pinto Beans", quant:"10oz"},
@@ -21,6 +24,7 @@ function App() {
   const [unit, setUnit] = useState("amount")
   const [displayQuant, setDisplayQuant] = useState("")
   const [selectedItems, setSelectedItems] = useState([])
+  const [selectAllTextVal, setSelectAllTextVal] = useState(select_text)
   
   const handleAddItems = () => {
     if (openAddItems === false) {
@@ -62,14 +66,40 @@ function App() {
   }
 
   var isChecked = (val) =>
-    selectedItems.includes(val) ? {backgroundColor: "green"} : {backgroundColor: "rgb(255, 247, 210)"};
+    selectedItems.includes(val) ? {backgroundColor: "rgb(255, 247, 210)", borderWidth: 2} : {backgroundColor: "white", color: "grey"};
 
   const handleSelect = (e) => {
-    setSelectedItems(items => [...items,e.target.value])
+    let chosen_val = e.target.value
+    if (selectedItems.includes(chosen_val)) {
+      setSelectedItems(items => items.filter((word, _, __) => {return word !== chosen_val}))
+    }
+    else {
+      setSelectedItems(items => [...items,chosen_val])
+    }
   }
 
   useEffect(() => {
-    console.log(selectedItems)
+    if (JSON.stringify(selectedItems) === JSON.stringify(items.map(a => a.val))) {
+      setSelectAllTextVal(deselect_text)
+    }
+    else {
+      setSelectAllTextVal(select_text)
+    }
+  },[selectedItems, items])
+
+  const selectAll = () => {
+    if (selectAllTextVal === select_text) {
+      setSelectedItems(items.map(a => a.val))
+      setSelectAllTextVal(deselect_text)
+    }
+    else {
+      setSelectedItems([])
+      setSelectAllTextVal(select_text)
+    }
+  }
+
+  useEffect(() => {
+    console.log("Hey ChatGPT, what can I make with these items:\n" + selectedItems)
   }, [selectedItems])
   
   return (
@@ -94,7 +124,7 @@ function App() {
               <option value='gals'>gals</option>
               <option value='box'>box</option>
             </select>
-          <button onClick={handleNewItem}>Submit</button>
+          <button className='submit' onClick={handleNewItem}>Submit</button>
         </div>
         {items.map((item, index) => (
           <ul key={index}>
@@ -104,16 +134,17 @@ function App() {
             <li className='quant'>
               {item.quant}
             </li>
-            <button className='delete-button' value={index} onClick={handleDeleteItem}>X</button>
+            <button className='delete-button' value={index} onClick={handleDeleteItem}>✘</button>
           </ul>
         ))}
       </div>}
-      {openSelectItems && <div className = 'pick-items'>
-        <div className="title"> Your Kitchen Inventory: </div> 
+      {openSelectItems && <div className = 'item-list'>
+        <div> Select items from your kitchen inventory to generate recipes for </div>
+        <button className='select-all-button' onClick={selectAll}>{selectAllTextVal}</button>
         {items.map((item, index) => (
           <div key={index}>
             {}
-            <button className='items' style={isChecked(item.val)} value={item.val} onClick={handleSelect}>
+            <button className='select-buttons' style={isChecked(item.val)} value={item.val} onClick={handleSelect}>
               {item.val}
             </button>
           </div>
