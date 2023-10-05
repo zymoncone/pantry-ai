@@ -14,17 +14,20 @@ function App() {
                        {val:"Apples", quant:"x4"}]
 
   const [items, setItems] = useState(sample_list)
-  const [openItems, setOpenItems] = useState(false)
+  const [openAddItems, setOpenAddItems] = useState(false)
+  const [openSelectItems, setOpenSelectItems] = useState(false)
   const [itemName, setItemName] = useState("")
   const [quant, setQuant] = useState("")
   const [unit, setUnit] = useState("amount")
   const [displayQuant, setDisplayQuant] = useState("")
+  const [selectedItems, setSelectedItems] = useState([])
   
   const handleAddItems = () => {
-    if (openItems === false) {
-      setOpenItems(true)
+    if (openAddItems === false) {
+      setOpenSelectItems(false)
+      setOpenAddItems(true)
     } else {
-      setOpenItems(false)
+      setOpenAddItems(false)
     }
   }
 
@@ -49,17 +52,36 @@ function App() {
     setItems(items => items.filter((_, index, __) => {return index.toString() !== e.target.value.toString()}))
   }
 
-  console.log(unit)
+  const handleSelectItems = () => {
+    if (openSelectItems === false) {
+      setOpenAddItems(false)
+      setOpenSelectItems(true)
+    } else {
+      setOpenSelectItems(false)
+    }
+  }
+
+  var isChecked = (val) =>
+    selectedItems.includes(val) ? {backgroundColor: "green"} : {backgroundColor: "rgb(255, 247, 210)"};
+
+  const handleSelect = (e) => {
+    setSelectedItems(items => [...items,e.target.value])
+  }
+
+  useEffect(() => {
+    console.log(selectedItems)
+  }, [selectedItems])
+  
   return (
     <div className="app">
       <section className="main">
       <h1>Pantry AI</h1>
       <div className="button-selections">
         <button onClick={handleAddItems}>Add Items</button>
-        <button>Select Items</button>
+        <button onClick={handleSelectItems}>Select Items</button>
         <button>Generate Recipes</button>
       </div>
-      {openItems && <div className='item-list'>
+      {openAddItems && <div className='item-list'>
         <input placeholder='Item Name' value={itemName} onChange={(e) => setItemName(e.target.value)} autoComplete="off"></input>
         <div className='form'>
           <input className="quantity" placeholder='Quantity' value={quant} onChange={(e) => setQuant(e.target.value)} autoComplete="off"></input>
@@ -86,6 +108,18 @@ function App() {
           </ul>
         ))}
       </div>}
+      {openSelectItems && <div className = 'pick-items'>
+        <div className="title"> Your Kitchen Inventory: </div> 
+        {items.map((item, index) => (
+          <div key={index}>
+            {}
+            <button className='items' style={isChecked(item.val)} value={item.val} onClick={handleSelect}>
+              {item.val}
+            </button>
+          </div>
+        ))}      
+      </div>}
+      
       </section>
     </div>
   );
