@@ -25,6 +25,8 @@ function App() {
   const [displayQuant, setDisplayQuant] = useState("")
   const [selectedItems, setSelectedItems] = useState([])
   const [selectAllTextVal, setSelectAllTextVal] = useState(select_text)
+  const [loading, setLoading] = useState("")
+  const [message, setMessage] = useState("")
   
   const handleAddItems = () => {
     if (openAddItems === false) {
@@ -101,6 +103,43 @@ function App() {
   useEffect(() => {
     console.log("Hey ChatGPT, what can I make with these items:\n" + selectedItems)
   }, [selectedItems])
+
+  /**************** OPEN AI CALL ***************************/
+    // get new message from Node.js backend server fetching from OpenAI API
+    const getMessage = async () => {
+
+      // clear message from chatGPT and remove submit and show loading to confirm click
+      setMessage("")
+      // setShowSubmit(false)
+      setLoading("Loading...")
+  
+      // load options as per OpenAI API requirements
+      const options = {
+        method: "POST",
+        body: JSON.stringify({
+          message: "Hey there, from Tapan and Szymon!" // this is what we are passing to backend. value comes from text area input
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+      try {
+        // fetch from server
+        const response = await fetch('http://18.222.29.93:8000/completitions', options)
+        // get response data
+        const data = await response.json()
+        // remove loading display and assign message
+        setLoading("")
+        setMessage(data.choices[0].message.content)
+        console.log(message)
+  
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+  /* *********************************************************** */
+
   
   return (
     <div className="app">
@@ -109,7 +148,7 @@ function App() {
       <div className="button-selections">
         <button onClick={handleAddItems}>Add Items</button>
         <button onClick={handleSelectItems}>Select Items</button>
-        <button>Generate Recipes</button>
+        <button onClick={getMessage}>Generate Recipes</button>
       </div>
       {openAddItems && <div className='item-list'>
         <input placeholder='Item Name' value={itemName} onChange={(e) => setItemName(e.target.value)} autoComplete="off"></input>
@@ -150,6 +189,7 @@ function App() {
           </div>
         ))}      
       </div>}
+      {loading && <div>{loading}</div>}
       
       </section>
     </div>
