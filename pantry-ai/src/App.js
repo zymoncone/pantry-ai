@@ -105,38 +105,40 @@ function App() {
   }, [selectedItems])
 
   /**************** OPEN AI CALL ***************************/
-    // get new message from Node.js backend server fetching from OpenAI API
-    const getMessage = async () => {
+  // get new message from Node.js backend server fetching from OpenAI API
+  const getMessage = async () => {
 
-      // clear message from chatGPT and remove submit and show loading to confirm click
-      setMessage("")
-      // setShowSubmit(false)
-      setLoading("Loading...")
-  
-      // load options as per OpenAI API requirements
-      const options = {
-        method: "POST",
-        body: JSON.stringify({
-          message: "Hey there, from Tapan and Szymon!" // this is what we are passing to backend. value comes from text area input
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-      try {
-        // fetch from server
-        const response = await fetch('http://18.222.29.93:8000/completitions', options)
-        // get response data
-        const data = await response.json()
-        // remove loading display and assign message
-        setLoading("")
-        setMessage(data.choices[0].message.content)
-        console.log(message)
-  
-      } catch (error) {
-        console.error(error)
+    // clear message from chatGPT and remove submit and show loading to confirm click
+    setMessage("")
+    setOpenSelectItems(false)
+    setOpenAddItems(false)
+    setLoading("Loading...")
+
+    // load options as per OpenAI API requirements
+    const options = {
+      method: "POST",
+      body: JSON.stringify({
+        message: "Hey ChatGPT, what can I make with these items:\n" + selectedItems
+                  + "\nLimit to 3 answers. Give me all the ingredients I need for each recipe in bullet form"
+      }),
+      headers: {
+        "Content-Type": "application/json"
       }
     }
+    try {
+      // fetch from server 18.222.29.93
+      const response = await fetch('http://18.222.29.93:8000/completitions', options)
+      // get response data
+      const data = await response.json()
+      // remove loading display and assign message
+      setLoading("")
+      setMessage(data.choices[0].message.content)
+      console.log(message)
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   /* *********************************************************** */
 
@@ -189,7 +191,8 @@ function App() {
           </div>
         ))}      
       </div>}
-      {loading && <div>{loading}</div>}
+      {loading && <div className='loading'>{loading}</div>}
+      {message && <div className='recipes'>{message}</div>}
       
       </section>
     </div>
