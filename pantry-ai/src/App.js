@@ -119,7 +119,12 @@ function App() {
       method: "POST",
       body: JSON.stringify({
         message: "Hey ChatGPT, what can I make with these items:\n" + selectedItems
-                  + "\nLimit to 3 answers. Give me all the ingredients I need for each recipe in bullet form"
+                  + "\nLimit to 3 answers. Give me all the ingredients I need for each \
+                  recipe in bullet form. You can use this as an example:\n\
+                  Recipe Name:\n\
+                  - Ingredient 1\n\
+                  - Ingredient 2\n\
+                  - Ingredient n"
       }),
       headers: {
         "Content-Type": "application/json"
