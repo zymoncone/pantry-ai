@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
-  color: white;
+  color: rgb(90, 90, 90);
   font-family: 'Onest', sans-serif;
 }
 
 .app {
-  background-image: linear-gradient(rgb(0, 41, 75), rgb(255, 238, 191));
+  /* background-image: linear-gradient(rgb(0, 41, 75), rgb(255, 238, 191)); */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -16,6 +16,7 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: whitesmoke;
 }
 
 .main {
@@ -32,19 +33,53 @@ h1 {
   font-family: 'Caveat', cursive;
   font-size: 85px;
   margin: 45px 0;
+  text-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.3);
 }
 
 button {
-  border: solid 0.5px;
-  background-color: rgb(255, 247, 210);
-  color: black;
-  border-color: black;
-  border-radius: 5px;
-  padding: 0 10px;
-  margin: 0px 0.5px;
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
   cursor: pointer;
-  height: 30px;
-  text-align: center;
+  display: inline-flex;
+  /* font-family: "JetBrains Mono",monospace; */
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+  margin: 0 1px;
+}
+
+button:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+button:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
 .button-selections button {
@@ -52,37 +87,38 @@ button {
 }
 
 .items {
-  border: solid 0.5px;
-  background-color: rgb(255, 247, 210);
+  background-image: radial-gradient(100% 100% at 100% 0, rgb(255, 247, 210) 0, rgb(255, 238, 162) 100%);
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 5px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
   color: black;
-  border-color: black;
   border-radius: 5px;
-  padding: 5px 15px;
-  margin: 2.5px 1px;
+  padding: 7px 15px;
+  margin: 2.5px 0;
   width: 150px;
+  height: 20px;
 }
 
 .quant {
-  border: solid 0.5px;
-  background-color: rgb(255, 247, 210);
+  background-image: radial-gradient(100% 100% at 100% 0, rgb(255, 247, 210) 0, rgb(255, 238, 162) 100%);
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
   color: black;
-  border-color: black;
   border-radius: 5px;
-  padding: 5px 15px;
-  margin: 2.5px 0;
+  padding: 7px 15px;
+  margin: 2.5px 0 0 3px;
   width: 50px;
+  height: 20px;
 }
 
 select {
-  border: solid 0.5px;
+  border: none;
+  box-sizing: border-box;
   background-color: rgb(255, 247, 210);
   color: black;
-  border-color: black;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   padding: 5px 15px;
   margin: 2.5px 0;
   width: 100px;
   height: 30px;
+  box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
 }
 
 option {
@@ -90,14 +126,19 @@ option {
 }
 
 .delete-button {
-  border: solid 0.5px;
-  background-color: tomato;
+  border: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #ff5a5a 0, #ff3737 100%);
   color: black;
-  border-color: black;
   border-radius: 5px;
   padding: 5px 10px;
-  margin: 2.5px 1px;
+  margin: 2.5px 0px 2.5px 0.25rem;
   height: 33px;
+}
+
+p {
+  max-width: 300px;
+  margin: 0;
+  padding: 0;
 }
 
 .item-list {
@@ -105,6 +146,12 @@ option {
   flex-direction: column;
   margin: 20px 0;
   align-items: center;
+  background-color: white;
+  border-radius: 0.25rem;
+  margin: 1rem auto;
+	padding: 2rem 1rem 1rem;
+  box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+  font-size: 14px;
 }
 
 .form {
@@ -115,20 +162,27 @@ option {
 }
 
 input {
-  width: 250px;
-  margin: 0 1px;
-  height: 25px;
-  color: black;
+  width: 263px;
+  margin: 0 0 0.1rem 0;
+  height: 30px;
+  border: none;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  padding: 0px 0.5rem;
+  box-sizing: border-box;
+  box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
 }
 
 .quantity {
-  height: 25px;
+  height: 30px;
   width: 81px;
+  margin-right: 2px;
+  box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
 }
 
 .submit {
-  height: 30px;
-  border-width: 2px;
+  border: none;
+  height: 28px;
   font-size: 14px;
 }
 
@@ -137,21 +191,34 @@ ul {
   display: flex;
   align-items: center;
   text-align: center;
-  width: 335px;
+  width: 300px;
   margin: 0;
+  padding: 0;
 }
 
 .select-buttons {
-  border: solid 0.5px;
-  background-color: rgb(255, 247, 210);
+  background-image: radial-gradient(100% 100% at 100% 0, rgb(255, 247, 210) 0, rgb(255, 238, 162) 100%);
   color: black;
-  border-color: black;
   border-radius: 5px;
   padding: 5px 15px;
   margin: 1px 0;
   width: 300px;
   height: 33px;
   font-size: 15px;
+}
+
+.select-buttons:focus {
+  box-shadow: rgb(59, 59, 59) 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgb(59, 59, 59) 0 -3px 0 inset;
+}
+
+.select-buttons:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgb(59, 59, 59) 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.select-buttons:active {
+  box-shadow: rgb(59, 59, 59) 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
 .select-all-button {
@@ -163,21 +230,80 @@ ul {
   font-size: 16px;
 }
 
-.recipes {
-  white-space: pre-wrap;
+.title {
+  font-weight: bold;
   border: solid 0.5px;
-  background-color: rgb(255, 247, 210);
-  color: black;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 247, 210);
   border-color: black;
   border-radius: 5px;
   padding: 15px;
-  margin: 2.5px 0;
+  margin: 10px 0 2.5px 0;
   width: 300px;
+}
+
+.ingredient {
+  /* border: solid 0.5px; */
+  background-image: radial-gradient(100% 100% at 100% 0, rgb(255, 247, 210) 0, rgb(255, 238, 162) 100%);
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  color: black;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 2px 0;
+  width: 250px;
 }
 
 .loading {
   margin: 10px;
   animation: pulse 5s infinite;
+}
+
+ol {
+	list-style: none;
+	counter-reset: list;
+	padding: 0 1rem;
+}
+
+li {
+	counter-increment: list;
+	width: 300px;
+	margin: 1rem auto;
+	padding: 2rem 1rem 1rem;
+	box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+	border-radius: 0.25rem;
+	overflow: hidden;
+	background-color: white;
+}
+
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+h3 {
+	display: flex;
+	align-items: baseline;
+	margin: 0 0 1em 0;
+	color: rgb(70 70 70);
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2);
+}
+
+h3::before {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 0 0 auto;
+	margin-right: 1rem;
+	width: 3rem;
+	height: 3rem;
+	content: counter(list);
+	padding: 1rem;
+	border-radius: 50%;
+	background-image: radial-gradient(100% 100% at 100% 0, tomato 0, rgb(255, 74, 74) 100%);
+  box-shadow: rgba(45, 35, 66, .4) 2px 2px 4px,rgba(45, 35, 66, .3) 2px 7px 13px -3px,rgba(58, 65, 111, .5) -2px -3px 0 inset;
+	color: white;
 }
 
 @keyframes pulse {

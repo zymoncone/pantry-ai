@@ -27,6 +27,7 @@ function App() {
   const [selectAllTextVal, setSelectAllTextVal] = useState(select_text)
   const [loading, setLoading] = useState("")
   const [message, setMessage] = useState("")
+  const [recipes, setRecipes] = useState([])
   
   const handleAddItems = () => {
     if (openAddItems === false) {
@@ -68,7 +69,7 @@ function App() {
   }
 
   var isChecked = (val) =>
-    selectedItems.includes(val) ? {backgroundColor: "rgb(255, 247, 210)", borderWidth: 2} : {backgroundColor: "white", color: "grey"};
+    selectedItems.includes(val) ? {color: "black"} : {backgroundImage: "radial-gradient(100% 100% at 100% 0, rgb(161, 161, 161) 0, rgb(59, 59, 59) 100%)", color: "rgb(200, 200, 200)"};
 
   const handleSelect = (e) => {
     let chosen_val = e.target.value
@@ -118,13 +119,13 @@ function App() {
     const options = {
       method: "POST",
       body: JSON.stringify({
-        message: "Hey ChatGPT, what can I make with these items:\n" + selectedItems
-                  + "\nLimit to 3 answers. Give me all the ingredients I need for each \
-                  recipe in bullet form. You can use this as an example:\n\
-                  Recipe Name:\n\
-                  - Ingredient 1\n\
-                  - Ingredient 2\n\
-                  - Ingredient n"
+        message: "Hey ChatGPT, what can I make with these items:\n" + selectedItems +
+                  "\nLimit to 3 answers. Give me all the ingredients I need for each " +
+                  "recipe in bullet form. You can use this as an example:\n" +
+                  "Recipe Name:\n" +
+                  "- Ingredient 1\n" +
+                  "- Ingredient 2\n" +
+                  "- Ingredient n"
       }),
       headers: {
         "Content-Type": "application/json"
@@ -147,6 +148,29 @@ function App() {
 
   /* *********************************************************** */
 
+  useEffect(() => {
+    if (message !== "") {
+      setRecipes([])
+      const regexp = /(?<recipe>[Rr]ecipe\s[0-9]+:[\s\w]+(\n-\s.+)+)/g
+      let matchRecipes = Array.from(message.match(regexp))
+
+      // console.log(matchRecipes)
+
+      for (let i=0, len=matchRecipes.length; i<len; i++) {
+        let regTitle = /[Rr]ecipe\s[0-9]+:\s([\w\s]+)\n/
+        let regRecipe = /-\s(.+)/g
+        let title = Array.from(matchRecipes[i].match(regTitle))[1]
+        let newMatch = Array.from(matchRecipes[i].matchAll(regRecipe))
+        newMatch = newMatch.map(a => a[1])
+        setRecipes(items => [...items,{title:title, ingredients:newMatch}])
+        
+      }
+      
+    }
+    
+  }, [message])
+
+  // console.log(recipes)
   
   return (
     <div className="app">
@@ -185,7 +209,7 @@ function App() {
         ))}
       </div>}
       {openSelectItems && <div className = 'item-list'>
-        <div> Select items from your kitchen inventory to generate recipes for </div>
+        <p> Select items from your kitchen inventory to generate recipes for </p>
         <button className='select-all-button' onClick={selectAll}>{selectAllTextVal}</button>
         {items.map((item, index) => (
           <div key={index}>
@@ -197,7 +221,21 @@ function App() {
         ))}      
       </div>}
       {loading && <div className='loading'>{loading}</div>}
-      {message && <div className='recipes'>{message}</div>}
+      {message && <ol>
+                  {recipes.map(({title, ingredients}, i) => (
+                    <li key={"t" + i}>
+                    <h3>{title}</h3>
+                    <div className='ingredient-list'>
+                    {ingredients.map((ingredient, j) => (
+                      <div key={"i" + j} className='ingredient'>
+                        {ingredient}
+                      </div>
+                    ))}
+                    </div>
+                    </li>
+                  ))}
+                  
+                  </ol>}
       
       </section>
     </div>
