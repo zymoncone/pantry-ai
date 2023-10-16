@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { Login } from "./Login"
+import { Register } from "./Register"
 // import { Animated } from "react-animated-css"
 
 function App() {
