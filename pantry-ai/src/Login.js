@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export const Login = () => {
     const [email, setEmail] = useState('')
@@ -10,7 +10,7 @@ export const Login = () => {
     }
 
     function validateForm(){
-        return email.length > 0 && pass.length>0 //need to update this to check actual info stored in server
+        return email.length > 0 && pass.length > 0 //need to update this to check actual info stored in server
     }
 
     
