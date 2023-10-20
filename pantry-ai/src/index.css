@@ -69,7 +69,7 @@ button {
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow,transform;
-  font-size: 14px;
+  font-size: 15px;
   margin: 1px 1px;
 }
 
@@ -88,11 +88,11 @@ button {
 }
 
 .main-button {
-  width: 9.5rem;
+  width: 10.5rem;
 }
 
 .child-button {
-  width: 18.5rem;
+  width: 20rem;
 }
 
 .temp {
@@ -123,10 +123,6 @@ button:hover {
 button:active {
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
-}
-
-.button-selections button {
-  font-size: 14px;
 }
 
 .items {
@@ -328,7 +324,8 @@ li {
 
 h3 {
 	display: flex;
-	align-items: baseline;
+	align-items: center;
+  text-align: left;
 	margin: 0 0 1em 0;
 	color: rgb(70 70 70);
   text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2);

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import ItemList from './components/ItemList'
 import ItemSelection from './components/ItemSelection'
 import RecipeList from './components/RecipeList'
@@ -17,7 +19,7 @@ function App() {
   
   const [selectedItems, setSelectedItems] = useState([])
   
-  const [loading, setLoading] = useState("")
+  const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState("")
   const [recipes, setRecipes] = useState([])
   
@@ -33,7 +35,8 @@ function App() {
     setMessage("")
     setOpenSelectItems(false)
     setOpenAddItems(false)
-    setLoading("Loading...")
+    setLoading(true)
+    notify()
 
     // load options as per OpenAI API requirements
     const options = {
@@ -57,7 +60,7 @@ function App() {
       // get response data
       const data = await response.json()
       // remove loading display and assign message
-      setLoading("")
+      setLoading(false)
       setMessage(data.choices[0].message.content)
       console.log(message)
 
@@ -88,6 +91,8 @@ function App() {
     
   }, [message])
   
+  const notify = () => toast.info("Generating Recipes")
+
   return (
     <div className="app">
       <section className="main">
@@ -109,7 +114,20 @@ function App() {
                                    setQuant={setQuant} 
                                    />}
         {openSelectItems && <ItemSelection items={items} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />}
-        {loading && <div className='loading'>{loading}</div>}
+        {loading && <div>
+                      <ToastContainer
+                        position="top-center"
+                        autoClose={20000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                        />
+        </div>}
         {message && <RecipeList recipes={recipes} />}
       </section>
     </div>
