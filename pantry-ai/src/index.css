@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Monoton&family=Onest:wght@100;200;300;400;500;600;700;800;900&family=Silkscreen:wght@400;700&display=swap');
 
 * {
   color: rgb(90, 90, 90);
@@ -30,10 +30,15 @@ body {
 }
 
 h1 {
-  font-family: 'Caveat', cursive;
-  font-size: 85px;
+  font-family: 'Silkscreen', cursive;
+  font-size: 55px;
   margin: 45px 0;
-  text-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.3);
+  /* text-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.3); */
+}
+
+.ai {
+  font-family: 'Silkscreen', cursive;
+  color: tomato;
 }
 
 button {
@@ -64,8 +69,46 @@ button {
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow,transform;
-  font-size: 18px;
-  margin: 0 1px;
+  font-size: 14px;
+  margin: 1px 1px;
+}
+
+.item-selection {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  animation: slidein 0.2s none;
+}
+
+.generate-selection {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  animation: slidein 0.2s none;
+}
+
+.main-button {
+  width: 9.5rem;
+}
+
+.child-button {
+  width: 18.5rem;
+}
+
+.temp {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.temp-button {
+  height: 20px;
+  font-size: 10px;
+  margin: 0 0 0 10px;
+  box-shadow: none;
+  background-image: none;
+  background-color: #ff3737;
 }
 
 button:focus {
@@ -159,6 +202,7 @@ p {
   align-items: center;
   text-align: center;
   margin-bottom: 15px;
+  animation: slidein 0.2s none;
 }
 
 input {
@@ -310,6 +354,23 @@ h3::before {
   0% {opacity: 0;}
   100% {opacity: 100;}
   0% {opacity: 0;}
+}
+
+@keyframes appear {
+  0% {opacity: 0;}
+  100% {opacity: 100;}
+}
+
+@keyframes slidein {
+  from {
+    transform: translateY(-30px);
+    opacity: 0%;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 100%;
+  }
 }
 
 @media only screen and (max-width:600px) {
