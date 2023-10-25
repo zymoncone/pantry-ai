@@ -32,6 +32,7 @@ const ItemSelection = ({ items, selectedItems, setSelectedItems }) => {
       {backgroundImage: "radial-gradient(100% 100% at 100% 0, rgb(161, 161, 161) 0, rgb(59, 59, 59) 100%)", color: "rgb(200, 200, 200)"}
 
   const handleSelect = (e) => {
+    e.preventDefault()
     let chosen_val = e.target.value
     if (selectedItems.includes(chosen_val)) {
       setSelectedItems(items => items.filter((word, _, __) => {return word !== chosen_val}))

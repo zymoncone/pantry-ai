@@ -14,15 +14,18 @@ const ItemList = ({ itemName, quant, items, setItems, setItemName, setQuant }) =
   }, [unit, quant])
 
   const handleNewItem = () => {
-    let newEntry = {val: itemName, quant: displayQuant}
+    let newEntry = {name: itemName, quantity: displayQuant}
+
     if (quant !== "" && itemName !== "") {
       setItems(items => [...items, newEntry])
       setQuant("")
       setItemName("")
+      setUnit("amount")
     }
   }
 
   const handleDeleteItem = (e) => {
+    e.preventDefault()
     setItems(items => items.filter((_, index, __) => {return index.toString() !== e.target.value.toString()}))
   }
 
@@ -36,7 +39,7 @@ const ItemList = ({ itemName, quant, items, setItems, setItemName, setQuant }) =
             autoComplete="off">
       </input>
       {itemName.length > 0  && <div className='form'>
-        <input className="quantity" placeholder='Quantity'  value={quant} onChange={(e) => setQuant(e.target.value)} autoComplete="off"></input>
+        <input className="quantity" placeholder='Quantity' value={quant} onChange={(e) => setQuant(e.target.value)} autoComplete="off"></input>
         <select name='unit' onChange={(e) => setUnit(e.target.value)}>
             <option value='amount'>amount</option>
             <option value='lbs'>lbs</option>

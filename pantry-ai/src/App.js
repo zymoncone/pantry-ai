@@ -22,6 +22,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState("")
   const [recipes, setRecipes] = useState([])
+  const [generateState, setGenerateState] = useState(0)
   
   useEffect(() => {
     console.log("Hey ChatGPT, what can I make with these items:\n" + selectedItems)
@@ -29,9 +30,10 @@ function App() {
 
   /**************** OPEN AI CALL ***************************/
   // get new message from Node.js backend server fetching from OpenAI API
-  const getMessage = async () => {
+  const getMessage = async (user_message, state) => {
 
     // clear message from chatGPT and remove submit and show loading to confirm click
+    setGenerateState(state)
     setMessage("")
     setOpenSelectItems(false)
     setOpenAddItems(false)
@@ -42,13 +44,7 @@ function App() {
     const options = {
       method: "POST",
       body: JSON.stringify({
-        message: "Hey ChatGPT, what can I make with these items:\n" + selectedItems +
-                  "\nLimit to 3 answers. Give me all the ingredients I need for each " +
-                  "recipe in bullet form. You can use this as an example:\n" +
-                  "Recipe Name:\n" +
-                  "- Ingredient 1\n" +
-                  "- Ingredient 2\n" +
-                  "- Ingredient n"
+        message: user_message
       }),
       headers: {
         "Content-Type": "application/json"
@@ -56,13 +52,13 @@ function App() {
     }
     try {
       // fetch from server 18.222.29.93
-      const response = await fetch('http://18.222.29.93:8000/completitions', options)
+      const response = await fetch('http://localhost:8000/completions', options)
       // get response data
       const data = await response.json()
       // remove loading display and assign message
       setLoading(false)
       setMessage(data.choices[0].message.content)
-      console.log(message)
+      console.log("MESSAGE: " + data.choices[0].message.content)
 
     } catch (error) {
       console.error(error)
@@ -74,14 +70,15 @@ function App() {
   useEffect(() => {
     if (message !== "") {
       setRecipes([])
-      const regexp = /(?<recipe>[Rr]ecipe\s[0-9]+:[\s\w]+(\n-\s.+)+)/g
+      const regexp = /(?<recipe>[Rr]ecipe\s[0-9]+:[\s\-\w]+(\n-\s.+)+)/g
       let matchRecipes = Array.from(message.match(regexp))
 
-      // console.log(matchRecipes)
+      console.log(matchRecipes)
 
       for (let i=0, len=matchRecipes.length; i<len; i++) {
-        let regTitle = /[Rr]ecipe\s[0-9]+:\s([\w\s]+)\n/
+        let regTitle = /[Rr]ecipe\s[0-9]+:\s(.+?)(?=\n)/
         let regRecipe = /-\s(.+)/g
+        console.log(matchRecipes[i].match(regTitle))
         let title = Array.from(matchRecipes[i].match(regTitle))[1]
         let newMatch = Array.from(matchRecipes[i].matchAll(regRecipe))
         newMatch = newMatch.map(a => a[1])
@@ -91,20 +88,25 @@ function App() {
     
   }, [message])
   
-  const notify = () => toast.info("Generating Recipes")
+  const notify = () => toast.info('Generating Recipes')
+  const notifyUpdate = () => toast.info('Data upload successful!')
+
+  console.log(message)
+  console.log(recipes)
 
   return (
     <div className="app">
       <section className="main">
         <div className="temp">Signed In As {user}<button className="temp-button" 
                                                          onClick={() => getData(user).then(a => setItems(a))}>Get Data</button>
-        <button className="temp-button" onClick={() => pushData(user, items)}>Update Data</button></div>
+        <button className="temp-button" onClick={() => pushData(user, items).then(notifyUpdate())}>Update Data</button></div>
         <h1>Pantry<span className='ai'>AI</span></h1>
         <Buttons openAddItems={openAddItems} 
                 setOpenAddItems={setOpenAddItems}
                 openSelectItems={openSelectItems}
                 setOpenSelectItems={setOpenSelectItems}
                 getMessage={getMessage}
+                selectedItems={selectedItems}
                 />
         {openAddItems && <ItemList itemName={itemName} 
                                    quant={quant}
@@ -114,21 +116,21 @@ function App() {
                                    setQuant={setQuant} 
                                    />}
         {openSelectItems && <ItemSelection items={items} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />}
-        {loading && <div>
-                      <ToastContainer
-                        position="top-center"
-                        autoClose={20000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="light"
-                        />
-        </div>}
-        {message && <RecipeList recipes={recipes} />}
+        <div>
+            <ToastContainer
+              position="top-center"
+              autoClose={20000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              />
+        </div>
+        {message && <RecipeList recipes={recipes} generateState={generateState} />}
       </section>
     </div>
   )

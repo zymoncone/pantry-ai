@@ -174,10 +174,32 @@ option {
   height: 33px;
 }
 
+.recipe-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 p {
   max-width: 300px;
   margin: 0;
   padding: 0;
+}
+
+h5 {
+  width: 300px;
+  margin: 1rem auto 0;
+	padding: 1rem;
+  border: none;
+  box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	background-color: white;
+  align-items: center;
+  text-align: center;
+  font-size: 15px;
+  font-weight: normal;
 }
 
 .item-list {
@@ -302,6 +324,7 @@ ol {
 	list-style: none;
 	counter-reset: list;
 	padding: 0 1rem;
+  margin: 0;
 }
 
 li {
@@ -346,6 +369,46 @@ h3::before {
   box-shadow: rgba(45, 35, 66, .4) 2px 2px 4px,rgba(45, 35, 66, .3) 2px 7px 13px -3px,rgba(58, 65, 111, .5) -2px -3px 0 inset;
 	color: white;
 }
+
+/* Login Page */
+
+.auth-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 3rem 0 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 15px;
+  animation: slidein 0.2s none;
+  background-color: white;
+  padding: 2rem 2rem 2rem;
+  border-radius: 0.25rem;
+}
+
+#username {
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+#password {
+  margin: 0.25rem 0 2rem;
+  padding: 1rem;
+}
+
+label {
+  font-size: 18px;
+  margin-top: 1rem;
+}
+
+/* Animations */
 
 @keyframes pulse {
   0% {opacity: 0;}

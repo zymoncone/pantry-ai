@@ -1,9 +1,43 @@
 import { useState, useEffect } from 'react'
 
-const Buttons = ({ openAddItems, setOpenAddItems, openSelectItems, setOpenSelectItems, getMessage }) => {
+const Buttons = ({ openAddItems, setOpenAddItems, openSelectItems, setOpenSelectItems, getMessage, selectedItems }) => {
 
   const [openPantry, setOpenPantry] = useState(false)
   const [openRecipeOptions, setOpenRecipeOptions] = useState(false)
+
+  const single_message = "Hey ChatGPT, what can I make with these items:\n" + selectedItems +
+                           "\nLimit to 3 answers. Give me all the ingredients I need for each " +
+                           "recipe in bullet form. Please provide the answer in this form:\n" +
+                           "Recipe 1: Recipe Name\n" +
+                           "- Ingredient 1\n" +
+                           "- Ingredient 2\n" +
+                           "- Ingredient n" +
+                           "Recipe 2: Recipe Name\n" +
+                           "- Ingredient 1\n" +
+                           "- Ingredient 2\n" +
+                           "- Ingredient n" +
+                           "Recipe n: Recipe Name\n" +
+                           "- Ingredient 1\n" +
+                           "- Ingredient 2\n" +
+                           "- Ingredient n"
+
+  const week_plan_message = "Hey ChatGPT, I want to plan out my 7-day week for what meals I can make. " +
+                            "What can I make with these items:\n" + selectedItems + " ? Limit the answer to 7 possible options. " +
+                            "If you use one item in one recipe do not use it in another. If some recipes " +
+                            "require items that I do not have, that is alright. Give me all the ingredients I need for each " +
+                            "recipe in bullet form. Please provide the answer in this form:\n" +
+                            "Recipe 1: Recipe Name\n" +
+                            "- Ingredient 1\n" +
+                            "- Ingredient 2\n" +
+                            "- Ingredient n" +
+                            "Recipe 2: Recipe Name\n" +
+                            "- Ingredient 1\n" +
+                            "- Ingredient 2\n" +
+                            "- Ingredient n" +
+                            "Recipe n: Recipe Name\n" +
+                            "- Ingredient 1\n" +
+                            "- Ingredient 2\n" +
+                            "- Ingredient n"
 
   useEffect(() => {
     if (!openPantry) {
@@ -59,8 +93,8 @@ const Buttons = ({ openAddItems, setOpenAddItems, openSelectItems, setOpenSelect
       <button className='child-button' onClick={handleSelectItems}>Select Items</button>
     </div>}
     {openRecipeOptions && <div className='generate-selection'>
-      <button className='child-button' onClick={() => alert('not implemented yet!')}>Plan My Week</button>
-      <button className='child-button' onClick={getMessage}>Plan Ideas for Just Today</button>
+      <button className='child-button' onClick={() => getMessage(week_plan_message, 1)}>Plan My Week</button>
+      <button className='child-button' onClick={() => getMessage(single_message, 2)}>Plan Ideas for Just Today</button>
     </div>}
     </>
   )
