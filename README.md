@@ -1,4 +1,4 @@
-Welcome to PantryAI! 
+👋 Welcome to PantryAI! 
 
 https://github.com/zymoncone/pantry-ai/assets/10564686/66bd9f94-872d-4230-9132-390b006e32da
 
@@ -14,11 +14,13 @@ This project was built using these technologies.
 
 ## Features
 
-**📖 Multi-Page Layout**
+**🤖 OpenAI Chat Completions API**
 
-**🎨 Styled with React-Bootstrap and Css with easy to customize colors**
+**🎨 Styled with React-Toastify and CSS**
 
 **📱 Fully Responsive**
+
+**🖥️ Backend hosted on AWS EC2 Instance & S3 Storage for profiles**
 
 ## Getting Started
 
