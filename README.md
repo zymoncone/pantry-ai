@@ -1,5 +1,5 @@
-## 👋 Welcome to PantryAI!
-Turn a list of your pantry items into a generated list of recipes for the week or just for the day. Check out the demo below:
+# 👋 Welcome to PantryAI!
+### Turn a list of your pantry items into a generated list of recipes for the week or just for the day. Check out the demo below:
 
 ## V1 Demo
 
