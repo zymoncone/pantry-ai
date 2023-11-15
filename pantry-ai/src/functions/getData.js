@@ -11,7 +11,7 @@ export const getData = async (user) => {
   }
 
   try {
-    const response = await fetch('http://localhost:8000/S3', options)
+    const response = await fetch('http://18.222.29.93:8000/S3', options)
     const data = await response.json()
 
     // console.log(Array.from(data[user]))

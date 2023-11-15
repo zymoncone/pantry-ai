@@ -52,13 +52,15 @@ function App() {
     }
     try {
       // fetch from server 18.222.29.93
-      const response = await fetch('http://localhost:8000/completions', options)
+      const response = await fetch('http://18.222.29.93:8000/completions', options)
       // get response data
       const data = await response.json()
       // remove loading display and assign message
+      console.log("MESSAGE: " + data)
       setLoading(false)
+      
       setMessage(data.choices[0].message.content)
-      console.log("MESSAGE: " + data.choices[0].message.content)
+      
 
     } catch (error) {
       console.error(error)
@@ -116,10 +118,10 @@ function App() {
                                    setQuant={setQuant} 
                                    />}
         {openSelectItems && <ItemSelection items={items} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />}
-        <div>
+        {loading && <div>
             <ToastContainer
               position="top-center"
-              autoClose={20000}
+              autoClose={35000}
               hideProgressBar={false}
               newestOnTop={false}
               closeOnClick
@@ -129,7 +131,7 @@ function App() {
               pauseOnHover
               theme="light"
               />
-        </div>
+        </div>}
         {message && <RecipeList recipes={recipes} generateState={generateState} />}
       </section>
     </div>

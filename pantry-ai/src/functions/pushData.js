@@ -12,7 +12,7 @@ export const pushData = async (user, items) => {
   }
 
   try {
-    const update = await fetch('http://localhost:8000/S3', options)
+    const update = await fetch('http://18.222.29.93:8000/S3', options)
 
     console.log('Data upload successful!')
 
