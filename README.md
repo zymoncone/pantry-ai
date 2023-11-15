@@ -1,6 +1,8 @@
-👋 Welcome to PantryAI! 
+## 👋 Welcome to PantryAI!
+Turn a list of your pantry items into a generated list of recipes for the week or just for the day. Check out the demo below:
 
-https://github.com/zymoncone/pantry-ai/assets/10564686/66bd9f94-872d-4230-9132-390b006e32da
+## V1 Demo
+![](https://github.com/zymoncone/pantry-ai/assets/10564686/66bd9f94-872d-4230-9132-390b006e32da)
 
 ## Built With
 
