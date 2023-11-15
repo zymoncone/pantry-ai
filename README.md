@@ -24,7 +24,7 @@ This project was built using these technologies.
 
 **📱 Fully Responsive**
 
-**🖥️ Backend hosted on AWS EC2 Instance & S3 Storage for profiles**
+**🖥️ Backend hosted on AWS EC2 Instance & S3 Storage for profiles (https://github.com/zymoncone/chicago-ec2)**
 
 ## Getting Started
 
