@@ -6,13 +6,27 @@ Turn a list of your pantry items into a generated list of recipes for the week o
 
 https://github.com/zymoncone/pantry-ai/assets/10564686/66bd9f94-872d-4230-9132-390b006e32da
 
+## V1 Release
+
+- Generate recipes with list of ingredients for each day of the week
+- Generate recipes to chose from for a single meal
+- Save pantry items per user
+- Add/delete pantry items
+- Select items to generate recipes for
+
+## V2 Release (coming soon)
+
+- Create grocery list from items
+- Create an Instacart from grocery items
+- 2FA for user login
+
 ## Built With
 
 This project was built using these technologies.
 
 - React.js
 - Node.js
-- Express.js
+- Express
 - CSS3
 - OpenAI
 
